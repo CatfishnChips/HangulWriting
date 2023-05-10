@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+public class LearnUIManager : MonoBehaviour
 {
     [SerializeField] private RectTransform _canvas;
     [SerializeField] private Image _image;
@@ -38,10 +38,15 @@ public class UIManager : MonoBehaviour
         EnableIndicators();
     }
 
-    public void StartLetternLearn(){
-        string name = _letterInput.text;
-        EventManager.Instance.OnLetterLearnStart?.Invoke(name);
+    public void ReturnToMenu(){
+        SceneManager.Instance.LoadScene(0);
+    }
 
+    public void ResetLetter(){
+        EventManager.Instance.OnResetLetter?.Invoke();
+    }
 
+    public void BackLetter(){
+        EventManager.Instance.OnBackLetter?.Invoke();
     }
 }

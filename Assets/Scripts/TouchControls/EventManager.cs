@@ -5,26 +5,15 @@ using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
-    #region Singleton
-
     public static EventManager Instance;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+    private void Awake() {
         Instance = this;
     }
 
-    #endregion
+    #region Scene Event
 
-    #region Application Events
-
-    public UnityAction<string> OnLetterLearnStart;
-    public UnityAction OnLetterLearnEnd;
+    public UnityAction OnResetLetter;
+    public UnityAction OnBackLetter;
 
     #endregion
     

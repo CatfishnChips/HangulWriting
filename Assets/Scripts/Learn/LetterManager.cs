@@ -8,29 +8,28 @@ public class LetterManager : MonoBehaviour
     [SerializeField] private float _distanceTreshold = 5f;
     private Letter _currentLetter = null;
     private int _currentPart = 0;
-    private UIManager _uiManager;
+    private LearnUIManager _uiManager;
 
     private void Awake(){
-        _uiManager = FindObjectOfType<UIManager>();
+        _uiManager = FindObjectOfType<LearnUIManager>();
     }
 
     private void Start(){
-        EventManager.Instance.OnLetterLearnStart += OnLearnStart;
         EventManager.Instance.OnGesture += OnGesture;
+        EventManager.Instance.OnBackLetter += DeadvancePart;
+        EventManager.Instance.OnResetLetter += ResetLetter;
+
+        OnLearnStart();
     }
 
     private void OnDisable(){
-        EventManager.Instance.OnLetterLearnStart -= OnLearnStart;
         EventManager.Instance.OnGesture -= OnGesture;
+        EventManager.Instance.OnBackLetter -= DeadvancePart;
+        EventManager.Instance.OnResetLetter -= ResetLetter;
     }
 
-    private Letter FindLetter(string name){
-        foreach (Letter letter in _letters){
-            if (letter._name == name){
-                return letter;
-            }
-        }
-        return null;
+    private Letter FindLetter(int index){
+        return _letters[index];
     }
 
     private Vector2 ConvertToRect(Vector2 screenPos){
@@ -52,7 +51,7 @@ public class LetterManager : MonoBehaviour
     }
 
     private void CompleteLearn(){
-        EventManager.Instance.OnLetterLearnEnd?.Invoke();
+        SceneManager.Instance.LoadScene(0);
     }
 
     private void OnGesture(string name, TouchData touch){
@@ -68,8 +67,9 @@ public class LetterManager : MonoBehaviour
         }
     }
 
-    private void OnLearnStart(string name){
-        Letter letter = FindLetter(name);
+    private void OnLearnStart(){
+        int index = SceneManager.Instance.LearnLetterIndex;
+        Letter letter = FindLetter(index);
         if (letter != null){
             _currentLetter = letter;
             _currentPart = 0;
@@ -78,6 +78,20 @@ public class LetterManager : MonoBehaviour
             _uiManager.UpdateIndicators(part.StartPos, part.StartRot, part.EndPos, part.EndRot);
         }
     }
+
+    public void DeadvancePart(){
+        if (_currentPart > 0){
+            _currentPart --;
+            Part part = _currentLetter._parts[_currentPart];
+            _uiManager.UpdateImage(part.Sprite);
+            _uiManager.UpdateIndicators(part.StartPos, part.StartRot, part.EndPos, part.EndRot);
+        }
+    }
+
+    public void ResetLetter(){
+        OnLearnStart();
+    }
+    
 
     // private void ArrangeMovesList(){
     //     Dictionary<string, ComboMoveSpecs> tempDictWriter;
