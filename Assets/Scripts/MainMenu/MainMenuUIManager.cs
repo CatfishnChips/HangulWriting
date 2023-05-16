@@ -30,6 +30,7 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void StartLearnMode(int index){
         SceneManager.Instance.LearnLetterIndex = index;
+        DontDestroyOnLoad(SceneManager.Instance);
         SceneManager.Instance.LoadScene(2);
     }
 }

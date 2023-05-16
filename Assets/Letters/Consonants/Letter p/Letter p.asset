@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9cb7da3d5319545a9c4ddcd8f5c291, type: 3}
+  m_Name: Letter p
+  m_EditorClassIdentifier: 
+  _name: p
+  _parts:
+  - Sprite: {fileID: 21300000, guid: d2e4ef20460252f4ebf78cf658422e2b, type: 3}
+    Gesture: Right
+    StartPos: {x: -102.9605, y: 67.76318}
+    EndPos: {x: 102.9605, y: 67.76318}
+    StartRot: 0
+    EndRot: 0
+  - Sprite: {fileID: 21300000, guid: af4f606bb3d2ba64a98f6b4143dc174d, type: 3}
+    Gesture: Down
+    StartPos: {x: -52.96052, y: 67.76318}
+    EndPos: {x: -52.96052, y: -58.55263}
+    StartRot: -90
+    EndRot: -90
+  - Sprite: {fileID: 21300000, guid: cb7332bee9226b2449a919b996148caa, type: 3}
+    Gesture: Down
+    StartPos: {x: 52.96052, y: 67.76318}
+    EndPos: {x: 52.96052, y: -58.55263}
+    StartRot: -90
+    EndRot: -90
+  - Sprite: {fileID: 21300000, guid: aa2de75e28fccce4b9b81e438edfce85, type: 3}
+    Gesture: Right
+    StartPos: {x: -108.2237, y: -68.42104}
+    EndPos: {x: 108.2237, y: -68.42104}
+    StartRot: 0
+    EndRot: 0

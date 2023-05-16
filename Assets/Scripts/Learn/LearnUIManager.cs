@@ -10,6 +10,8 @@ public class LearnUIManager : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private RectTransform _arrow;
     [SerializeField] private RectTransform _tip;
+    [SerializeField] private List<GameObject> _steps;
+    [SerializeField] private List<Image> _stepLetters;
 
     [SerializeField] private TMP_InputField _letterInput; //Temporary
 
@@ -36,6 +38,24 @@ public class LearnUIManager : MonoBehaviour
         _arrow.anchoredPosition = endPos;
         _arrow.rotation = Quaternion.Euler(0, 0, endRot);
         EnableIndicators();
+    }
+
+    public void SetupSteps(Letter letter){
+        int number = letter._parts.Count;
+
+        foreach (GameObject item in _steps)
+        {
+            item.SetActive(false);
+        }
+
+        for(int i = 0; i < number; i++){
+            _steps[i].SetActive(true);
+            _stepLetters[i].sprite = letter._parts[i].Sprite;
+        }
+    }
+
+    public void UpdateStep(int index){
+       
     }
 
     public void ReturnToMenu(){

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9cb7da3d5319545a9c4ddcd8f5c291, type: 3}
+  m_Name: Letter g
+  m_EditorClassIdentifier: 
+  _name: g
+  _parts:
+  - Sprite: {fileID: 21300000, guid: 3c83b067cc6602844b55d4cf7cbd0016, type: 3}
+    Gesture: CornerDown
+    StartPos: {x: -99.01316, y: 71.71054}
+    EndPos: {x: 94.40789, y: -82.34211}
+    StartRot: 0
+    EndRot: -90

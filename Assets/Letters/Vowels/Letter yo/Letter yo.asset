@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9cb7da3d5319545a9c4ddcd8f5c291, type: 3}
+  m_Name: Letter yo
+  m_EditorClassIdentifier: 
+  _name: yo
+  _parts:
+  - Sprite: {fileID: 21300000, guid: b0bfe322210dc6347b1dc37ea94b9750, type: 3}
+    Gesture: Down
+    StartPos: {x: -49.67105, y: 53.28948}
+    EndPos: {x: -49.67105, y: -42.76316}
+    StartRot: -90
+    EndRot: -90
+  - Sprite: {fileID: 21300000, guid: 544b11017a67f3d46a7738ad9d3d0824, type: 3}
+    Gesture: Down
+    StartPos: {x: 49.67106, y: 53.28948}
+    EndPos: {x: 49.67106, y: -42.76316}
+    StartRot: -90
+    EndRot: -90
+  - Sprite: {fileID: 21300000, guid: c6062a9d2e7666a49ac26c70245bcef2, type: 3}
+    Gesture: Right
+    StartPos: {x: -124.6711, y: -52.63158}
+    EndPos: {x: 124.6711, y: -52.63158}
+    StartRot: 0
+    EndRot: 0

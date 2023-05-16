@@ -74,6 +74,7 @@ public class LetterManager : MonoBehaviour
             _currentLetter = letter;
             _currentPart = 0;
             Part part = _currentLetter._parts[_currentPart];
+            _uiManager.SetupSteps(_currentLetter);
             _uiManager.UpdateImage(part.Sprite);
             _uiManager.UpdateIndicators(part.StartPos, part.StartRot, part.EndPos, part.EndRot);
         }

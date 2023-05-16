@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9cb7da3d5319545a9c4ddcd8f5c291, type: 3}
+  m_Name: Letter s
+  m_EditorClassIdentifier: 
+  _name: s
+  _parts:
+  - Sprite: {fileID: 21300000, guid: 82ef0a34bef09e24a94f9718f3099465, type: 3}
+    Gesture: QCircleLeft
+    StartPos: {x: 0, y: 78.94737}
+    EndPos: {x: -104.2763, y: -71.05264}
+    StartRot: -90
+    EndRot: -150
+  - Sprite: {fileID: 21300000, guid: 38ee228b303813c4695dbbf5ff544c62, type: 3}
+    Gesture: QCircleRight
+    StartPos: {x: 0, y: 78.94737}
+    EndPos: {x: 104.2763, y: -71.05264}
+    StartRot: -90
+    EndRot: -30
