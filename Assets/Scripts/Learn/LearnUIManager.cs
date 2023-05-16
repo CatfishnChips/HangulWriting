@@ -15,6 +15,9 @@ public class LearnUIManager : MonoBehaviour
 
     [SerializeField] private TMP_InputField _letterInput; //Temporary
 
+    [SerializeField] private Image _mascotImage;
+    [SerializeField] private TextMeshProUGUI _infoText;
+
     public RectTransform Canvas {get{return _canvas;}}
 
     public void UpdateImage(Sprite sprite){
@@ -52,6 +55,14 @@ public class LearnUIManager : MonoBehaviour
             _steps[i].SetActive(true);
             _stepLetters[i].sprite = letter._parts[i].Sprite;
         }
+    }
+
+    public void UpdateInfo(string info){
+        _infoText.text = info;
+    }
+
+    public void UpdateMascot(Sprite sprite){
+        _mascotImage.sprite = sprite;
     }
 
     public void UpdateStep(int index){

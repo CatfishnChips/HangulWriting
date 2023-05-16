@@ -8,6 +8,7 @@ public class Letter : ScriptableObject
 {
     public string _name;
     public List<Part> _parts = new List<Part>();
+    [TextArea(2,4)] public string _information;
 }
 
 [System.Serializable]
