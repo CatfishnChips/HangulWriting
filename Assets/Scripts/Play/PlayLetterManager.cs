@@ -2,23 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class PlayLetterManager : MonoBehaviour
 {
     [SerializeField] int _score = 0;
     public int missedLetters = 0;
     [SerializeField] GameObject _letterObj;
     [SerializeField] float _spawnInterval;
     
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnLetters());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()

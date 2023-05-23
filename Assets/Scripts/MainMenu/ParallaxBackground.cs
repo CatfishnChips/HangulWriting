@@ -8,20 +8,22 @@ public class ParallaxBackground : MonoBehaviour
     [SerializeField] private float _lenght;
     [SerializeField] private float _scrollSpeed;
     private Vector2 _startPosition;
+    private RectTransform _rectTransform;
 
     void Start()
     {
-        _startPosition = (Vector2)transform.position;
+        _rectTransform = GetComponent<RectTransform>();
+        _startPosition = (Vector2)_rectTransform.localPosition;
     }
 
     private void Scroll(){
         float delta = _scrollSpeed * Time.deltaTime * _parallax;
-        transform.position += new Vector3(delta, 0f, 0f);
+        _rectTransform.localPosition += new Vector3(delta, 0f, 0f);
     }
 
     private void CheckReset(){
-        if((Mathf.Abs(transform.position.x) - _lenght) > 0){
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+        if((Mathf.Abs(_rectTransform.localPosition.x) - _lenght) > 0){
+            _rectTransform.localPosition = new Vector3(0f, _rectTransform.localPosition.y, _rectTransform.localPosition.z);
         }
     }
 

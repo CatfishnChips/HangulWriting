@@ -5,14 +5,14 @@ using UnityEngine;
 public class SineWave : MonoBehaviour
 {
     [SerializeField] private float _multiplier = 1f;
-    private float _startY;
+    private RectTransform _rectTransform;
 
     private void Start(){
-        _startY = transform.position.y;
+        _rectTransform = GetComponent<RectTransform>();
     }
 
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, _startY + Mathf.Sin(Time.timeSinceLevelLoad) * _multiplier, transform.position.z);
+        _rectTransform.localPosition = new Vector3(0, Mathf.Sin(Time.timeSinceLevelLoad) * _multiplier, 0);
     }
 }

@@ -28,14 +28,22 @@ public class SceneManager : MonoBehaviour
     public int LearnLetterIndex {get{return _learnLetterIndex;} set{_learnLetterIndex = value;}}
     public Sprite MascotSprite {get{return _mascotSprite;} set{_mascotSprite = value;}}
     public int Points {get{return _points;} set{_points = value;}}
+    public List<ShopItem> ShopItemList {get{return _shopItemList;}}
 
-    [SerializeField] private Sprite _defaultMascotSprite;
+    [SerializeField] private List<ShopItem> _shopItemList;
+    [SerializeField] private PlayerData _playerData;
 
     private void Start(){
-        _mascotSprite = _defaultMascotSprite;
+        _points = _playerData.Points;
+        _mascotSprite = _playerData.Mascot;
     }
 
     public void LoadScene(int sceneIndex){
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
+    }
+
+    public void UpdatePlayerData(){
+        _playerData.Mascot = _mascotSprite;
+        _playerData.Points = _points;
     }
 }

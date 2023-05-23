@@ -6,7 +6,7 @@ using TMPro;
 public class LetterBubble : MonoBehaviour
 {
     [SerializeField] bool isPopped = false;
-    GameManager _gameManager;
+    PlayLetterManager _letterManager;
     [SerializeField] float _randomInitPush = 1f;
     [SerializeField] float _shrinkFactor = 0.99998f;
     [SerializeField] TextMeshPro _text;
@@ -14,6 +14,7 @@ public class LetterBubble : MonoBehaviour
     [SerializeField] string _letterLatin;
     [SerializeField] LetterBubbleScriptable[] _lettersHangulLatin = new LetterBubbleScriptable[36];
     int _random;
+    private Rigidbody2D _rigidbody2D;
 
     private void Awake()
     {
@@ -21,21 +22,20 @@ public class LetterBubble : MonoBehaviour
         _letterHangul = _lettersHangulLatin[_random].letterHangul;
         _letterLatin = _lettersHangulLatin[_random].letterLatin;
         _text.text = _letterHangul;
+        _letterManager = FindObjectOfType<PlayLetterManager>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        _gameManager = FindObjectOfType<GameManager>();
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-_randomInitPush, _randomInitPush), Random.Range(-_randomInitPush, _randomInitPush)));
+        _rigidbody2D.AddForce(new Vector2(Random.Range(-_randomInitPush, _randomInitPush), Random.Range(-_randomInitPush, _randomInitPush)));
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (transform.localScale.x <= 0f && isPopped == false)
         {
-            _gameManager.missedLetters++;
+            _letterManager.missedLetters++;
             isPopped = true;
         }
     }

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6943048152266273922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6943048152266273923}
+  - component: {fileID: 6943048152266273924}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6943048152266273923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943048152266273922}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6943048152266273924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943048152266273922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991531d5e8b63804f914e303675134d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shopItemList:
+  - {fileID: 11400000, guid: 1fb1476c509ddc8499abe53b6c2bb934, type: 2}
+  - {fileID: 11400000, guid: dcb4f3416e103134a8b12591a95a6f0b, type: 2}
+  - {fileID: 11400000, guid: 040f8161675ef96499396ab3ed03a725, type: 2}
+  - {fileID: 11400000, guid: f80bd6dc0125778419926ab0f4087eca, type: 2}
+  - {fileID: 11400000, guid: 77397c32817c9af46a819ff8f232ee6e, type: 2}
+  - {fileID: 11400000, guid: 94ab4898eef7e4941957df0e3eb96a5e, type: 2}
+  - {fileID: 11400000, guid: 6b66fc08e6c30ca41a56658fa01a350e, type: 2}
+  - {fileID: 11400000, guid: 44d4dfe66c56985459fbbda2c5b70f46, type: 2}
+  - {fileID: 11400000, guid: e72ad3b6d343d5b44a43333ee4a60b97, type: 2}
+  _playerData: {fileID: 11400000, guid: d3a27a12ef74ac34693f783ffacb198e, type: 2}
