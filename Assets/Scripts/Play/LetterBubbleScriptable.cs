@@ -9,4 +9,5 @@ public class LetterBubbleScriptable : ScriptableObject
 {
     public string letterHangul;
     public string letterLatin;
+    public string gestureName;
 }

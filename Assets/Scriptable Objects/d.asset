@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterHangul: "\u3137"
   letterLatin: d
+  gestureName: ya

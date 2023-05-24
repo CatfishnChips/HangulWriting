@@ -6,7 +6,6 @@ using TMPro;
 using System;
 using QDollarGestureRecognizer;
 
-[RequireComponent(typeof(LineRenderer))]
 public class MultiGestureController : MonoBehaviour
 {
     #region Singleton
@@ -21,8 +20,6 @@ public class MultiGestureController : MonoBehaviour
             return;
         }
         Instance = this;
-
-        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     #endregion
@@ -35,7 +32,10 @@ public class MultiGestureController : MonoBehaviour
     private bool _isTouchBActive;
     private List<PDollarGestureRecognizer.Point> _pointList = new List<PDollarGestureRecognizer.Point>();
     private List<PDollarGestureRecognizer.Gesture> _templateList = new List<PDollarGestureRecognizer.Gesture>();
-    private DollarRecognizer _recognizerDollar = new DollarRecognizer();
+
+    [SerializeField] private GameObject _lineRendererPrefab;
+    private List<LineRenderer> _lineRenderers = new List<LineRenderer>();
+    private int _lineRendererIndex = -1;
     private LineRenderer _lineRenderer;
     private int _pointCount = 0;
 
@@ -79,6 +79,8 @@ public class MultiGestureController : MonoBehaviour
             _touch.ScreenStartPosition = screenPosition;
             PDollarGestureRecognizer.Point point = new PDollarGestureRecognizer.Point(screenPosition.x, screenPosition.y, _currentStrokeIndex);
             _pointList.Add(point);
+            NewLineRenderer();
+            AddPointToLineRenderer(worldPosition);
         }
         else{
             _isTouchBActive = false;
@@ -91,7 +93,7 @@ public class MultiGestureController : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject() && _isTouchBActive){
                 PDollarGestureRecognizer.Point point = new PDollarGestureRecognizer.Point(screenPosition.x, screenPosition.y, _currentStrokeIndex);
                 _pointList.Add(point);
-                AddPointToLineRenderer(screenPosition);
+                //AddPointToLineRenderer(worldPosition);
             }
         }
         _touch.State = TouchState.Hold;
@@ -104,7 +106,7 @@ public class MultiGestureController : MonoBehaviour
             PDollarGestureRecognizer.Point point = new PDollarGestureRecognizer.Point(inputEventDragParams.ScreenPosition.x,
                 inputEventDragParams.ScreenPosition.y, _currentStrokeIndex);
             _pointList.Add(point);
-            AddPointToLineRenderer(inputEventDragParams.ScreenPosition);
+            AddPointToLineRenderer(inputEventDragParams.WorldPosition);
         }
         _touch.State = TouchState.Drag;
     }
@@ -117,7 +119,7 @@ public class MultiGestureController : MonoBehaviour
                 PDollarGestureRecognizer.Point point = new PDollarGestureRecognizer.Point(inputEventParams.ScreenPosition.x,
                     inputEventParams.ScreenPosition.y, _currentStrokeIndex);
                 _pointList.Add(point);
-                AddPointToLineRenderer(inputEventParams.ScreenPosition);
+                AddPointToLineRenderer(inputEventParams.WorldPosition);
                 _currentStrokeIndex++;
             }  
         }
@@ -131,43 +133,60 @@ public class MultiGestureController : MonoBehaviour
         match = QPointCloudRecognizer.Classify(gesture, _templateList.ToArray());
         ResetGesture();
 
-        if (match != ""){
+        if (match != null){
             EventManager.Instance.OnMultiGesture?.Invoke(match);
+            _nameText.text = match;
         }
     }
 
     public void ResetGesture(){
         _currentStrokeIndex = 0;
         _pointList.Clear();
-        ResetLineRenderer();
+        ResetLineRenderers();
     }
 
-    // public void RecordGesture() 
-    // {   
-    //     string name = _nameInput.text;
-    //     _recognizerDollar.SavePattern(name, _pointList);
-    //     Debug.Log("Gesture -  " + name + " has been recorded.");
-    // }
+    public void RecordGesture() 
+    {   
+        string name = _nameInput.text;
+        PDollarGestureRecognizer.Gesture gesture = new PDollarGestureRecognizer.Gesture(_pointList.ToArray(), name);
+        _templateList.Add(gesture);
+        ResetGesture();
+        Debug.Log("Gesture -  " + name + " has been recorded.");
+    }
 
-    // public void WriteGesture() 
-    // {
-    //     string name = _nameInput.text;
-    //     DollarRecognizer.Unistroke unistroke = _recognizerDollar.SavePattern(name, _pointList);
-    //     string gestureName = _nameInput.text;
-    //     string fileName = string.Format("{0}/{1}-{2}.xml", Application.persistentDataPath, gestureName, DateTime.Now.ToFileTime());
-    //     GestureIO.WriteGesture(unistroke, gestureName, fileName);
-    //     Debug.Log("Gesture -  " + name + " has been saved.");
-    // }
+    public void WriteGesture() 
+    {
+        string name = _nameInput.text;
+
+        // Write Gesture
+        string fileName = string.Format("{0}/{1}-{2}.xml", Application.persistentDataPath, name, DateTime.Now.ToFileTime());
+        GestureIO.WriteMultiGesture(_pointList.ToArray(), name, fileName);
+
+        // Record Gesture
+        PDollarGestureRecognizer.Gesture gesture = new PDollarGestureRecognizer.Gesture(_pointList.ToArray(), name);
+        _templateList.Add(gesture);
+        ResetGesture();
+        Debug.Log("Gesture -  " + name + " has been saved.");
+    }
 
     private void ReadGesture(){
         //Load pre-made gestures
-		TextAsset[] gesturesXml = Resources.LoadAll<TextAsset>("Gestures/");
-		foreach (TextAsset gestureXml in gesturesXml)
-			_recognizerDollar.AddToLibrary(GestureIO.ReadGestureFromXML(gestureXml.text));
+        TextAsset[] gesturesXml = Resources.LoadAll<TextAsset>("MultiGestures/");
+		foreach (TextAsset gestureXml in gesturesXml){
+            PDollarGestureRecognizer.Gesture gesture = GestureIO.ReadMultiGestureFromXML(gestureXml.text);
+            _templateList.Add(gesture);
             //Add loaded gestures to library.
+        }
     }
 
     #region Line Renderer
+    private void NewLineRenderer(){
+        GameObject obj = Instantiate(_lineRendererPrefab);
+        _lineRenderer = obj.GetComponent<LineRenderer>();
+        _lineRendererIndex++;
+        _lineRenderers.Add(_lineRenderer);
+        _pointCount = 0;
+    }
 
     private void AddPointToLineRenderer(Vector2 position){   
         _lineRenderer.positionCount = _pointCount + 1;
@@ -175,8 +194,12 @@ public class MultiGestureController : MonoBehaviour
         _pointCount++;
     }
 
-    private void ResetLineRenderer(){
-        _lineRenderer.positionCount = 0;
+    private void ResetLineRenderers(){
+        _lineRendererIndex = -1;
+        foreach(LineRenderer lineRenderer in _lineRenderers){
+            Destroy(lineRenderer.gameObject);
+        }
+        _lineRenderers.Clear();
     }
 
     #endregion
