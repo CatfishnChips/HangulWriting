@@ -38,4 +38,5 @@ MonoBehaviour:
     EndPos: {x: 75.68391, y: -71.01063}
     StartRot: 0
     EndRot: 0
-  _information: "Letter \u3142 is pronounced as \"b\" in English. It is a Consonant."
+  _information: "Letter \u3142 is pronounced as \"b\" or \"p\" in English. It is
+    a Consonant."

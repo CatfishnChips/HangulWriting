@@ -110,12 +110,30 @@ public class GestureController : MonoBehaviour
                 _pointList.Add(inputEventParams.ScreenPosition);
 
                 RecognizeGesture(out string Name, out float Score);
+                Vector2 direction = (_touchB.ScreenEndPosition - _touchB.ScreenStartPosition).normalized;
+                string name = PatchworkDirectionNameChange(Name, direction);
 
-                if (Score >= _scoreTreshold) {
-                    EventManager.Instance.OnGesture?.Invoke(Name, _touchB);
-                }
+                EventManager.Instance.OnGesture?.Invoke(name, _touchB);
             }  
         }
+    }
+
+    private string PatchworkDirectionNameChange(string name, Vector2 direction){
+        Debug.Log(direction);
+
+        if (name == "Right" || name == "Down"){
+            if ((direction.x >= 0.5) && (direction.y <= 0.5 && direction.y >= -0.5)) // Right
+            {
+                if (name == "Down")
+                name = "Right";
+            }
+            else if ((direction.x <= 0.5 && direction.x >= -0.5) && (direction.y <= -0.5)) // Down
+            {
+                if (name == "Right")
+                name = "Down";
+            }
+        }
+        return name;
     }
 
     #endregion
