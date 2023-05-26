@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Screen.SetResolution(1080, 1920, FullScreenMode.Windowed, 30);
+        Screen.SetResolution(608, 1080, FullScreenMode.Windowed, 30);
         Cursor.SetCursor(_cursorTexture, Vector2.zero, CursorMode.ForceSoftware);
     }
 
