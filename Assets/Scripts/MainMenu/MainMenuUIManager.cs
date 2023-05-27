@@ -11,6 +11,7 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] private List<GameObject> _costTextList;
     [SerializeField] private List<GameObject> _ownedTextList;
     [SerializeField] private TextMeshProUGUI _pointText;
+    [SerializeField] private Sprite _defaultMascot;
 
     private void Start(){
         SetupSprites();
@@ -80,6 +81,12 @@ public class MainMenuUIManager : MonoBehaviour
                 _ownedTextList[index].SetActive(true);
             }
         } 
+        SceneManager.Instance.UpdatePlayerData();
+    }
+
+    public void ResetMascot(){
+        SceneManager.Instance.MascotSprite = _defaultMascot;
+        SetupSprites();
         SceneManager.Instance.UpdatePlayerData();
     }
 }

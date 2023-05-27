@@ -222,8 +222,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPopped: 0
   _randomInitPush: 80
-  _shrinkFactor: 0.999
+  _shrinkFactor: 0.075
   _text: {fileID: 2869022280017386551}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _alternateColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!58 &2317121934726083490
 CircleCollider2D:
   m_ObjectHideFlags: 0

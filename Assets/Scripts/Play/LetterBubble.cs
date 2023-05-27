@@ -12,6 +12,7 @@ public class LetterBubble : MonoBehaviour
     [SerializeField] TextMeshPro _text;
     private LetterBubbleScriptable _letter;
     private Rigidbody2D _rigidbody2D;
+    [SerializeField] private Color _defaultColor, _alternateColor;
 
     public LetterBubbleScriptable Letter {get{return _letter;}}
 
@@ -29,10 +30,12 @@ public class LetterBubble : MonoBehaviour
         // 25% chance to be Latin, 75% chance to be Hangul
         if (random > 75){
             _text.text = _letter.letterLatin;
+            _text.color = _alternateColor;
         }
         else
         {
             _text.text = _letter.letterHangul;
+            _text.color = _defaultColor;
         }
 
         _letterManager.AddToBubbleList(this);
@@ -40,18 +43,14 @@ public class LetterBubble : MonoBehaviour
     }
 
     void Update()
-    {
-        if (transform.localScale.x <= 0.50f)
+    {   transform.localScale -= transform.localScale * _shrinkFactor * Time.deltaTime;
+
+        if (transform.localScale.x <= 1f)
         {
             _letterManager.DecreaseHealth();
             _letterManager.RemoveFromBubbleList(this);
             Destroy(gameObject);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        transform.localScale = transform.localScale * _shrinkFactor;
     }
 
     public void PopBubble(){

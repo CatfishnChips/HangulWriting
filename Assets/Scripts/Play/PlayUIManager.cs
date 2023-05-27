@@ -16,9 +16,11 @@ public class PlayUIManager : MonoBehaviour
     [SerializeField] private Scrollbar _healthBar;
     [SerializeField] private Image _handle;
     [SerializeField] private Color _high, _mid, _low, _last;
+    [SerializeField] private Image _mascotImage;
 
     private void Start(){
         _pointsText.text = SceneManager.Instance.Points.ToString();
+        UpdateMascot(SceneManager.Instance.MascotSprite);
     }
 
     public void Pause(){
@@ -97,5 +99,9 @@ public class PlayUIManager : MonoBehaviour
     public void ReturnToMenu(){
         Time.timeScale = 1;
         SceneManager.Instance.LoadScene(0);
+    }
+
+    public void UpdateMascot(Sprite sprite){
+        _mascotImage.sprite = sprite;
     }
 }

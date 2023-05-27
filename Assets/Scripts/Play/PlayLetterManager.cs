@@ -72,9 +72,9 @@ public class PlayLetterManager : MonoBehaviour
     public void AddScore()
     {
         _score++;
-        _uiManager.UpdateScore(_score);
         SceneManager.Instance.Points++;
         SceneManager.Instance.UpdatePlayerData();
+        _uiManager.UpdateScore(_score);
     }
 
     public void AddToBubbleList(LetterBubble letterBubble){

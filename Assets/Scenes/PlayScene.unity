@@ -1720,7 +1720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -9535,6 +9535,7 @@ MonoBehaviour:
   _mid: {r: 1, g: 0.85098046, b: 0, a: 1}
   _low: {r: 1, g: 0.4039216, b: 0, a: 1}
   _last: {r: 1, g: 0, b: 0, a: 1}
+  _mascotImage: {fileID: 2002363816}
 --- !u!222 &3646687572486196144
 CanvasRenderer:
   m_ObjectHideFlags: 0
