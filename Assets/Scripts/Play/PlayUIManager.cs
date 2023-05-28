@@ -19,6 +19,10 @@ public class PlayUIManager : MonoBehaviour
     [SerializeField] private Image _mascotImage;
 
     private void Start(){
+        UpdateScene();
+    }
+
+    private void UpdateScene(){
         _pointsText.text = SceneManager.Instance.Points.ToString();
         UpdateMascot(SceneManager.Instance.MascotSprite);
     }
